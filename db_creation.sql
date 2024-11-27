@@ -13,7 +13,13 @@ CREATE TABLE tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
     description TEXT,
-    assigned_to INT,
     status ENUM('Pending', 'In Progress', 'Completed') DEFAULT 'Pending',
-    FOREIGN KEY (assigned_to) REFERENCES users(id)
+    assigned_to INT,
+    created_by INT,
+    FOREIGN KEY (assigned_to) REFERENCES users(id),
+    FOREIGN KEY (created_by) REFERENCES users(id)
 );
+
+INSERT INTO users (username, password, role) VALUES ('admin', 'admin123', 'Admin');
+INSERT INTO users (username, password, role) VALUES ('staff', 'staff123', 'Staff');
+INSERT INTO users (username, password, role) VALUES ('customer', 'customer123', 'Customer');
